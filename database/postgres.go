@@ -42,10 +42,12 @@ func (repo *PostgresRepository) GetStudent(ctx context.Context, id string) (*mod
 	}()
 	var student = models.Student{}
 	for rows.Next() {
-		err := rows.Scan(&student.Id, &student.Name, &student.Age)
-		if err != nil {
-			return nil, err
+		if err = rows.Scan(&student.Id, &student.Name, &student.Age); err == nil {
+			return &student, nil
 		}
+	}
+	if err = rows.Err(); err != nil {
+		return nil, err
 	}
 	return &student, nil
 }

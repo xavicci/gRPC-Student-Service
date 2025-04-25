@@ -1,22 +1,24 @@
+syntax = "proto3";
+
 package student;
 
 option go_package = "github.com/xavicci/gRPC-Student-Service;studentpb";
 
 message Student {
-    optional string id = 1;
-    optional string name = 2;
-    optional int32 age = 3;
+    string id = 1;
+    string name = 2;
+    int32 age = 3;
 }
 
 message GetStudentRequest {
-    optional string id = 1;
+    string id = 1;
 }
 
 message SetStudentResponse {
-    optional string id = 1;
+    string id = 1;
 }
 
 service StudentService {
-    rpc GetStudent(GetStudentRequest) returns (Student) {}
-    rpc SetStudent(Student) returns (SetStudentResponse) {}
+    rpc GetStudent(GetStudentRequest) returns (Student);
+    rpc SetStudent(Student) returns (SetStudentResponse);
 } 

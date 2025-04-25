@@ -23,9 +23,9 @@ const (
 
 type Student struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            *string                `protobuf:"bytes,1,opt,name=id" json:"id,omitempty"`
-	Name          *string                `protobuf:"bytes,2,opt,name=name" json:"name,omitempty"`
-	Age           *int32                 `protobuf:"varint,3,opt,name=age" json:"age,omitempty"`
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Age           int32                  `protobuf:"varint,3,opt,name=age,proto3" json:"age,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -61,29 +61,29 @@ func (*Student) Descriptor() ([]byte, []int) {
 }
 
 func (x *Student) GetId() string {
-	if x != nil && x.Id != nil {
-		return *x.Id
+	if x != nil {
+		return x.Id
 	}
 	return ""
 }
 
 func (x *Student) GetName() string {
-	if x != nil && x.Name != nil {
-		return *x.Name
+	if x != nil {
+		return x.Name
 	}
 	return ""
 }
 
 func (x *Student) GetAge() int32 {
-	if x != nil && x.Age != nil {
-		return *x.Age
+	if x != nil {
+		return x.Age
 	}
 	return 0
 }
 
 type GetStudentRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            *string                `protobuf:"bytes,1,opt,name=id" json:"id,omitempty"`
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -119,15 +119,15 @@ func (*GetStudentRequest) Descriptor() ([]byte, []int) {
 }
 
 func (x *GetStudentRequest) GetId() string {
-	if x != nil && x.Id != nil {
-		return *x.Id
+	if x != nil {
+		return x.Id
 	}
 	return ""
 }
 
 type SetStudentResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            *string                `protobuf:"bytes,1,opt,name=id" json:"id,omitempty"`
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -163,8 +163,8 @@ func (*SetStudentResponse) Descriptor() ([]byte, []int) {
 }
 
 func (x *SetStudentResponse) GetId() string {
-	if x != nil && x.Id != nil {
-		return *x.Id
+	if x != nil {
+		return x.Id
 	}
 	return ""
 }
@@ -181,12 +181,12 @@ const file_studentpb_student_proto_rawDesc = "" +
 	"\x11GetStudentRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\"$\n" +
 	"\x12SetStudentResponse\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id2\x8d\x01\n" +
-	"\x0eStudentService\x12<\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id2\x89\x01\n" +
+	"\x0eStudentService\x12:\n" +
 	"\n" +
-	"GetStudent\x12\x1a.student.GetStudentRequest\x1a\x10.student.Student\"\x00\x12=\n" +
+	"GetStudent\x12\x1a.student.GetStudentRequest\x1a\x10.student.Student\x12;\n" +
 	"\n" +
-	"SetStudent\x12\x10.student.Student\x1a\x1b.student.SetStudentResponse\"\x00B3Z1github.com/xavicci/gRPC-Student-Service;studentpb"
+	"SetStudent\x12\x10.student.Student\x1a\x1b.student.SetStudentResponseB3Z1github.com/xavicci/gRPC-Student-Service;studentpbb\x06proto3"
 
 var (
 	file_studentpb_student_proto_rawDescOnce sync.Once

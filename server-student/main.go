@@ -17,7 +17,7 @@ func main() {
 		log.Fatalf("Failed to listen: %v", err)
 	}
 
-	repo, err := database.NewPostgresRepository("postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable")
+	repo, err := database.NewPostgresRepository("postgres://postgres:postgres@localhost:54321/mibase?sslmode=disable")
 	if err != nil {
 		log.Fatalf("Failed to connect to database: %v", err)
 	}

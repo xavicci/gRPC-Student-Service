@@ -2,6 +2,7 @@ package server
 
 import (
 	"context"
+	"log"
 
 	"github.com/xavicci/gRPC-Student-Service/models"
 	"github.com/xavicci/gRPC-Student-Service/repository"
@@ -20,14 +21,17 @@ func NewStudentServer(repo repository.Repository) *Server {
 }
 
 func (s *Server) GetStudent(ctx context.Context, req *studentpb.GetStudentRequest) (*studentpb.Student, error) {
-	student, err := s.repo.GetStudent(ctx, req.GetId())
+
+	student, err := s.repo.GetStudent(ctx, req.Id)
 	if err != nil {
+		log.Printf("Error getting student: %v", err)
 		return nil, status.Errorf(codes.NotFound, "Student not found: %v", err)
 	}
+
 	return &studentpb.Student{
-		Id:   &student.Id,
-		Name: &student.Name,
-		Age:  &student.Age,
+		Id:   student.Id,
+		Name: student.Name,
+		Age:  student.Age,
 	}, nil
 }
 
@@ -38,12 +42,12 @@ func (s *Server) SetStudent(ctx context.Context, req *studentpb.Student) (*stude
 		Name: req.GetName(),
 		Age:  req.GetAge(),
 	}
+
 	err := s.repo.SetStudent(ctx, student)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "Failed to set student: %v", err)
 	}
 	return &studentpb.SetStudentResponse{
-		Id: &student.Id,
+		Id: student.Id,
 	}, nil
-
 }
