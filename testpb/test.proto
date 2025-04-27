@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+package test;
+
+option go_package = "github.com/xavicci/gRPC-Student-Service;testpb";
+
+
+message Test {
+    string id=1;
+    string name=2;
+}
+
+message Question {
+    string id = 1;
+    string question = 2;
+    string answer = 3;
+    string test_id = 4;
+}
+
+message GetTestRequest {
+    string id = 1;
+}
+
+message SetTestResponse {
+    string id = 1;
+    string name = 2;
+}
+
+message SetQuestionResponse {
+    bool ok = 1;
+}
+
+service TestService {
+    rpc GetTest(GetTestRequest) returns (Test);
+    rpc SetTest(Test) returns (SetTestResponse);
+    rpc SetQuestion(stream Question) returns (SetQuestionResponse);
+}
