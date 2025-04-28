@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package student;
 
-option go_package = "github.com/xavicci/gRPC-Student-Service;studentpb";
+option go_package = "github.com/xavicci/gRPC-Student-Service/studentpb";
 
 message Student {
     string id = 1;

@@ -71,3 +71,12 @@ func (s *TestServer) SetQuestion(stream testpb.TestService_SetQuestionServer) er
 		}
 	}
 }
+
+func (s *TestServer) EnrollStudents(stream testpb.TestService_EnrollStudentsServer) error { 
+	for {
+		msg, err := stream.Recv()
+		if err == io.EOF {
+			return stream.SendAndClose(&testpb.SetQuestionResponse{
+				Ok: true,
+			})
+		}

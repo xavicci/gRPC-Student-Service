@@ -7,6 +7,7 @@
 package testpb
 
 import (
+	studentpb "github.com/xavicci/gRPC-Student-Service/studentpb"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -281,11 +282,107 @@ func (x *SetQuestionResponse) GetOk() bool {
 	return false
 }
 
+type EnrollmentRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	StudentId     string                 `protobuf:"bytes,1,opt,name=student_id,json=studentId,proto3" json:"student_id,omitempty"`
+	TestId        string                 `protobuf:"bytes,2,opt,name=test_id,json=testId,proto3" json:"test_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *EnrollmentRequest) Reset() {
+	*x = EnrollmentRequest{}
+	mi := &file_testpb_test_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *EnrollmentRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*EnrollmentRequest) ProtoMessage() {}
+
+func (x *EnrollmentRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_testpb_test_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use EnrollmentRequest.ProtoReflect.Descriptor instead.
+func (*EnrollmentRequest) Descriptor() ([]byte, []int) {
+	return file_testpb_test_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *EnrollmentRequest) GetStudentId() string {
+	if x != nil {
+		return x.StudentId
+	}
+	return ""
+}
+
+func (x *EnrollmentRequest) GetTestId() string {
+	if x != nil {
+		return x.TestId
+	}
+	return ""
+}
+
+type GetStudentsPerTestRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TestId        string                 `protobuf:"bytes,1,opt,name=test_id,json=testId,proto3" json:"test_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetStudentsPerTestRequest) Reset() {
+	*x = GetStudentsPerTestRequest{}
+	mi := &file_testpb_test_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetStudentsPerTestRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetStudentsPerTestRequest) ProtoMessage() {}
+
+func (x *GetStudentsPerTestRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_testpb_test_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetStudentsPerTestRequest.ProtoReflect.Descriptor instead.
+func (*GetStudentsPerTestRequest) Descriptor() ([]byte, []int) {
+	return file_testpb_test_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *GetStudentsPerTestRequest) GetTestId() string {
+	if x != nil {
+		return x.TestId
+	}
+	return ""
+}
+
 var File_testpb_test_proto protoreflect.FileDescriptor
 
 const file_testpb_test_proto_rawDesc = "" +
 	"\n" +
-	"\x11testpb/test.proto\x12\x04test\"*\n" +
+	"\x11testpb/test.proto\x12\x04test\x1a\x17studentpb/student.proto\"*\n" +
 	"\x04Test\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\"g\n" +
@@ -300,13 +397,21 @@ const file_testpb_test_proto_rawDesc = "" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\"%\n" +
 	"\x13SetQuestionResponse\x12\x0e\n" +
-	"\x02ok\x18\x01 \x01(\bR\x02ok2\xa4\x01\n" +
+	"\x02ok\x18\x01 \x01(\bR\x02ok\"K\n" +
+	"\x11EnrollmentRequest\x12\x1d\n" +
+	"\n" +
+	"student_id\x18\x01 \x01(\tR\tstudentId\x12\x17\n" +
+	"\atest_id\x18\x02 \x01(\tR\x06testId\"4\n" +
+	"\x19GetStudentsPerTestRequest\x12\x17\n" +
+	"\atest_id\x18\x01 \x01(\tR\x06testId2\xb7\x02\n" +
 	"\vTestService\x12+\n" +
 	"\aGetTest\x12\x14.test.GetTestRequest\x1a\n" +
 	".test.Test\x12,\n" +
 	"\aSetTest\x12\n" +
 	".test.Test\x1a\x15.test.SetTestResponse\x12:\n" +
-	"\vSetQuestion\x12\x0e.test.Question\x1a\x19.test.SetQuestionResponse(\x01B0Z.github.com/xavicci/gRPC-Student-Service;testpbb\x06proto3"
+	"\vSetQuestion\x12\x0e.test.Question\x1a\x19.test.SetQuestionResponse(\x01\x12F\n" +
+	"\x0eEnrollStudents\x12\x17.test.EnrollmentRequest\x1a\x19.test.SetQuestionResponse(\x01\x12I\n" +
+	"\x12GetStudentsPerTest\x12\x1f.test.GetStudentsPerTestRequest\x1a\x10.student.Student0\x01B0Z.github.com/xavicci/gRPC-Student-Service;testpbb\x06proto3"
 
 var (
 	file_testpb_test_proto_rawDescOnce sync.Once
@@ -320,23 +425,30 @@ func file_testpb_test_proto_rawDescGZIP() []byte {
 	return file_testpb_test_proto_rawDescData
 }
 
-var file_testpb_test_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
+var file_testpb_test_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
 var file_testpb_test_proto_goTypes = []any{
-	(*Test)(nil),                // 0: test.Test
-	(*Question)(nil),            // 1: test.Question
-	(*GetTestRequest)(nil),      // 2: test.GetTestRequest
-	(*SetTestResponse)(nil),     // 3: test.SetTestResponse
-	(*SetQuestionResponse)(nil), // 4: test.SetQuestionResponse
+	(*Test)(nil),                      // 0: test.Test
+	(*Question)(nil),                  // 1: test.Question
+	(*GetTestRequest)(nil),            // 2: test.GetTestRequest
+	(*SetTestResponse)(nil),           // 3: test.SetTestResponse
+	(*SetQuestionResponse)(nil),       // 4: test.SetQuestionResponse
+	(*EnrollmentRequest)(nil),         // 5: test.EnrollmentRequest
+	(*GetStudentsPerTestRequest)(nil), // 6: test.GetStudentsPerTestRequest
+	(*studentpb.Student)(nil),         // 7: student.Student
 }
 var file_testpb_test_proto_depIdxs = []int32{
 	2, // 0: test.TestService.GetTest:input_type -> test.GetTestRequest
 	0, // 1: test.TestService.SetTest:input_type -> test.Test
 	1, // 2: test.TestService.SetQuestion:input_type -> test.Question
-	0, // 3: test.TestService.GetTest:output_type -> test.Test
-	3, // 4: test.TestService.SetTest:output_type -> test.SetTestResponse
-	4, // 5: test.TestService.SetQuestion:output_type -> test.SetQuestionResponse
-	3, // [3:6] is the sub-list for method output_type
-	0, // [0:3] is the sub-list for method input_type
+	5, // 3: test.TestService.EnrollStudents:input_type -> test.EnrollmentRequest
+	6, // 4: test.TestService.GetStudentsPerTest:input_type -> test.GetStudentsPerTestRequest
+	0, // 5: test.TestService.GetTest:output_type -> test.Test
+	3, // 6: test.TestService.SetTest:output_type -> test.SetTestResponse
+	4, // 7: test.TestService.SetQuestion:output_type -> test.SetQuestionResponse
+	4, // 8: test.TestService.EnrollStudents:output_type -> test.SetQuestionResponse
+	7, // 9: test.TestService.GetStudentsPerTest:output_type -> student.Student
+	5, // [5:10] is the sub-list for method output_type
+	0, // [0:5] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name
@@ -353,7 +465,7 @@ func file_testpb_test_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_testpb_test_proto_rawDesc), len(file_testpb_test_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   5,
+			NumMessages:   7,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

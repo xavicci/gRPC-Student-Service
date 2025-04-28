@@ -1,5 +1,6 @@
 syntax = "proto3";
 
+import "studentpb/student.proto";
 package test;
 
 option go_package = "github.com/xavicci/gRPC-Student-Service;testpb";
@@ -30,8 +31,19 @@ message SetQuestionResponse {
     bool ok = 1;
 }
 
+message EnrollmentRequest {
+    string student_id = 1;
+    string test_id = 2;
+}
+
+message GetStudentsPerTestRequest {
+    string test_id = 1;
+}
+
 service TestService {
     rpc GetTest(GetTestRequest) returns (Test);
     rpc SetTest(Test) returns (SetTestResponse);
     rpc SetQuestion(stream Question) returns (SetQuestionResponse);
+    rpc EnrollStudents(stream EnrollmentRequest) returns (SetQuestionResponse);
+    rpc GetStudentsPerTest(GetStudentsPerTestRequest) returns (stream student.Student);
 }
