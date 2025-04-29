@@ -186,7 +186,7 @@ const file_studentpb_student_proto_rawDesc = "" +
 	"\n" +
 	"GetStudent\x12\x1a.student.GetStudentRequest\x1a\x10.student.Student\x12;\n" +
 	"\n" +
-	"SetStudent\x12\x10.student.Student\x1a\x1b.student.SetStudentResponseB3Z1github.com/xavicci/gRPC-Student-Service;studentpbb\x06proto3"
+	"SetStudent\x12\x10.student.Student\x1a\x1b.student.SetStudentResponseB3Z1github.com/xavicci/gRPC-Student-Service/studentpbb\x06proto3"
 
 var (
 	file_studentpb_student_proto_rawDescOnce sync.Once

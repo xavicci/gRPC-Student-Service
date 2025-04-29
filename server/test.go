@@ -3,9 +3,11 @@ package server
 import (
 	"context"
 	"io"
+	"time"
 
 	"github.com/xavicci/gRPC-Student-Service/models"
 	"github.com/xavicci/gRPC-Student-Service/repository"
+	"github.com/xavicci/gRPC-Student-Service/studentpb"
 	"github.com/xavicci/gRPC-Student-Service/testpb"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
@@ -72,7 +74,7 @@ func (s *TestServer) SetQuestion(stream testpb.TestService_SetQuestionServer) er
 	}
 }
 
-func (s *TestServer) EnrollStudents(stream testpb.TestService_EnrollStudentsServer) error { 
+func (s *TestServer) EnrollStudents(stream testpb.TestService_EnrollStudentsServer) error {
 	for {
 		msg, err := stream.Recv()
 		if err == io.EOF {
@@ -80,3 +82,38 @@ func (s *TestServer) EnrollStudents(stream testpb.TestService_EnrollStudentsServ
 				Ok: true,
 			})
 		}
+		if err != nil {
+			return err
+		}
+		enrollment := &models.Enrollment{
+			StudentId: msg.GetStudentId(),
+			TestId:    msg.TestId,
+		}
+		err = s.repo.SetEnrollment(context.Background(), enrollment)
+		if err != nil {
+			return stream.SendAndClose(&testpb.SetQuestionResponse{
+				Ok: false,
+			})
+		}
+	}
+}
+
+func (s *TestServer) GetStudentsPerTest(req *testpb.GetStudentsPerTestRequest, stream testpb.TestService_GetStudentsPerTestServer) error {
+	students, err := s.repo.GetStudentsPerTest(context.Background(), req.TestId)
+	if err != nil {
+		return status.Errorf(codes.Internal, "Failed to get students per test: %v", err)
+	}
+	for _, student := range students {
+		student := &studentpb.Student{
+			Id:   student.Id,
+			Name: student.Name,
+			Age:  int32(student.Age),
+		}
+		err := stream.Send(student)
+		time.Sleep(time.Second * 2)
+		if err != nil {
+			return status.Errorf(codes.Internal, "Failed to send student: %v", err)
+		}
+	}
+	return nil
+}

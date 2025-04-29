@@ -12,7 +12,7 @@ protoc --go_out=. --go_opt=paths=source_relative --go-grpc_out=. --go-grpc_opt=p
 
 cd database
 docker build . -t grpc-students
-docker run -p 5432:5432 --name mypostgres -e POSTGRES_PASSWORD=postgres -e POSTGRES_USER=postgres -e POSTGRES_DB=mibase grpc-students
+docker run -p 5432:5432 --name mypostgres -e POSTGRES_PASSWORD=postgres -e POSTGRES_USER=postgres -e POSTGRES_DB=mibase test-grpc-db
 go run .\server-student\main.go
 
 docker run -p 5432:5432 -e POSTGRES_PASSWORD=postgres -e POSTGRES_USER=postgres -e POSTGRES_DB=mibase test-grpc-db
